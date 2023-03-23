@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.RechColetorGin2.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:textAlignment="center"
+            app:popupTheme="@style/Theme.RechColetorGin2.PopupOverlay"
+            app:title="Gestão Industrial"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Campo "Operador" -->
+    <EditText
+        android:id="@+id/operadorEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Operador"/>
+
+    <!-- Campo "Talão" -->
+    <EditText
+        android:id="@+id/talaoEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Talão"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
