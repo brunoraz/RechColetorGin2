@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -38,6 +39,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Talão"/>
+
+    <TextView
+        android:id="@+id/msgTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:padding="5dp"
+        android:text="Aguardando..."
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

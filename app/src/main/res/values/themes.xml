@@ -22,4 +22,5 @@
     <style name="Theme.RechColetorGin2.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.RechColetorGin2.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
