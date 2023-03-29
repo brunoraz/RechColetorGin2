@@ -13,21 +13,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.ini4j.Ini;
+import org.ini4j.IniPreferences;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.io.File;
-import java.io.IOException;
-import org.ini4j.Ini;
-import org.ini4j.IniPreferences;
 import java.util.prefs.Preferences;
 
 
@@ -111,11 +112,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url + "?organization=" + organization + "&entity=productionRegistry", payloadPai, response -> {
-            this.exibeMensagem("Registro realizado com sucesso!", false);
+            try {
+                this.exibeMensagem("Registro realizado com sucesso!\nID do Registro de Produção: " + response.getJSONArray("content").getJSONObject(0).getString("identifier"), false);
+            } catch (Exception e) {
+                this.exibeMensagem("Erro ao realizar registro: Retorno inválido", false);
+            }
             clearFields();
         }, error -> {
-            this.exibeMensagem("Erro ao realizar registro: " + error.toString(), true);
-            Log.e("TAG", "Error on make request: " + error.toString());
+            try {
+                String mensagemRetorno =  new String(error.networkResponse.data,
+                        HttpHeaderParser.parseCharset(error.networkResponse.headers, "utf-8"));
+                JSONObject json = new JSONObject(mensagemRetorno);
+                String errorMessage = json.getJSONObject("status").getString("message");
+                this.exibeMensagem("Erro ao realizar registro: " + errorMessage, true);
+            } catch (Exception e) {
+                this.exibeMensagem("Erro ao realizar registro: Retorno inválido", false);
+            }
+            Log.e("TAG", "Error on make request: " + error.networkResponse.headers);
 
        }) {
             @Override
